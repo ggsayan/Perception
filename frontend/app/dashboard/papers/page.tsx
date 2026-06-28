@@ -131,17 +131,22 @@ export default function PapersPage() {
         <Card withBorder p="xl" radius="md" ta="center">
           <FileText size={48} className="mx-auto text-gray-300 mb-4" />
           <Title order={3} mb="sm" c="dimmed">
-            No papers created yet
+            {role === "teacher"
+              ? "No papers created yet"
+              : "No papers available yet"}
           </Title>
           <Text c="dimmed" mb="md">
-            You haven't created any question papers. Get started by creating
-            your first one.
+            {role === "teacher"
+              ? "You haven't created any question papers. Get started by creating your first one."
+              : "No question papers are currently available for submission. Please check back later."}
           </Text>
-          <Link href="/paper/create">
-            <Button variant="light" leftSection={<Plus size={16} />}>
-              Create Paper
-            </Button>
-          </Link>
+          {role === "teacher" && (
+            <Link href="/paper/create">
+              <Button variant="light" leftSection={<Plus size={16} />}>
+                Create Paper
+              </Button>
+            </Link>
+          )}
         </Card>
       ) : (
         <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="lg">
